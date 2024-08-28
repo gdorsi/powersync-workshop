@@ -1,17 +1,4 @@
 services:
-  # An example demo app which is linked to the PowerSync instance above
-  demo-client:
-    build:
-      context: ./demo-app
-      dockerfile: Dockerfile
-      args:
-        # This is from the perspective of the client running in a local machine's browser
-        VITE_POWERSYNC_URL: http://localhost:${PS_PORT}
-        # From the demo-backend defined below
-        VITE_BACKEND_URL: http://localhost:${DEMO_BACKEND_PORT}
-    ports:
-      - ${DEMO_CLIENT_PORT}:4173
-
   # A backend which provides basic authentication and CRUD access to the Postgress DB from the client
   demo-backend:
     build:

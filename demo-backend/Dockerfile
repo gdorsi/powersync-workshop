@@ -11,9 +11,6 @@ ENV POWERSYNC_PUBLIC_KEY=
 ENV POWERSYNC_PRIVATE_KEY=
 ENV JWT_ISSUER=
 
-# The commit to checkout. This is main, but keeping it constant uses caches which might not update easily
-ARG GIT_COMMIT=964d62d7a975507d47486ebb2c6c9bde9b8c54c5
-
 # Set the working directory inside the container
 WORKDIR /app
 

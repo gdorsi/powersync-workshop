@@ -9,10 +9,13 @@ The `.env` file contains default configuration for the services. Reference this 
 This demo can be started by running the following in this demo directory
 
 ```bash
-docker compose up
+docker compose up -d
+
+cd demo-app
+pnpm dev
 ```
 
-The frontend can be accessed at `http://localhost:3030` in a browser.
+The frontend can be accessed at `http://localhost:5173` in a browser.
 
 ## Cleanup
 
