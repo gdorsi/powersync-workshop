@@ -5,6 +5,7 @@ import {
 } from "@/library/powersync/AppSchema";
 import { useQuery } from "@powersync/react";
 import React from "react";
+import { Schedule } from "./Schedule";
 
 export function MainPage() {
   const { data: people } = useQuery<PersonRecord>(
@@ -16,9 +17,13 @@ export function MainPage() {
   );
 
   return (
-    <pre>
-      {JSON.stringify(people, null, 2)}
-      {JSON.stringify(tasks, null, 2)}
-    </pre>
+    <>
+      {" "}
+      <pre>
+        {JSON.stringify(people, null, 2)}
+        {JSON.stringify(tasks, null, 2)}
+      </pre>
+      <Schedule />
+    </>
   );
 }
