@@ -1,15 +1,15 @@
-import { NavigationPage } from '@/components/navigation/NavigationPage';
-import { Box, Button, Grid, TextField, styled } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { useQuery } from '@powersync/react';
-import React from 'react';
+import { NavigationPage } from "@/components/navigation/NavigationPage";
+import { Box, Button, Grid, TextField, styled } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { useQuery } from "@powersync/react";
+import React from "react";
 
 export type LoginFormParams = {
   email: string;
   password: string;
 };
 
-const DEFAULT_QUERY = 'SELECT * FROM lists';
+const DEFAULT_QUERY = "SELECT * FROM people";
 
 export default function SQLConsolePage() {
   const inputRef = React.useRef<HTMLInputElement>();
@@ -23,10 +23,10 @@ export default function SQLConsolePage() {
       columns: firstItem
         ? Object.keys(firstItem).map((field) => ({
             field,
-            flex: 1
+            flex: 1,
           }))
         : [],
-      rows: querySQLResult
+      rows: querySQLResult,
     };
   }, [querySQLResult]);
 
@@ -42,7 +42,7 @@ export default function SQLConsolePage() {
               defaultValue={DEFAULT_QUERY}
               onKeyDown={(e) => {
                 const inputValue = inputRef.current?.value;
-                if (e.key == 'Enter' && inputValue) {
+                if (e.key == "Enter" && inputValue) {
                   setQuery(inputValue);
                 }
               }}
@@ -50,14 +50,15 @@ export default function SQLConsolePage() {
           </S.CenteredGrid>
           <S.CenteredGrid item xs={12} md={2}>
             <Button
-              sx={{ margin: '10px' }}
+              sx={{ margin: "10px" }}
               variant="contained"
               onClick={() => {
                 const queryInput = inputRef?.current?.value;
                 if (queryInput) {
                   setQuery(queryInput);
                 }
-              }}>
+              }}
+            >
               Execute Query
             </Button>
           </S.CenteredGrid>
@@ -68,14 +69,19 @@ export default function SQLConsolePage() {
             {queryDataGridResult.columns ? (
               <DataGrid
                 autoHeight={true}
-                rows={queryDataGridResult.rows?.map((r, index) => ({ ...r, id: r.id ?? index })) ?? []}
+                rows={
+                  queryDataGridResult.rows?.map((r, index) => ({
+                    ...r,
+                    id: r.id ?? index,
+                  })) ?? []
+                }
                 columns={queryDataGridResult.columns}
                 initialState={{
                   pagination: {
                     paginationModel: {
-                      pageSize: 20
-                    }
-                  }
+                      pageSize: 20,
+                    },
+                  },
                 }}
                 pageSizeOptions={[20]}
                 disableRowSelectionOnClick

@@ -71,11 +71,11 @@ router.delete('/', async (req, res) => {
   const values = [data.id];
 
   switch (table) {
-    case 'lists':
-      text = 'DELETE FROM lists WHERE id = $1';
+    case 'people':
+      text = 'DELETE FROM people WHERE id = $1';
       break;
-    case 'todos':
-      text = 'DELETE FROM todos WHERE id = $1';
+    case 'tasks':
+      text = 'DELETE FROM tasks WHERE id = $1';
       break;
     default:
       break;
@@ -97,23 +97,25 @@ const upsert = async (body, res) => {
   let values = [];
 
   switch (table) {
-    case 'lists':
+    case 'people':
       text =
-        'INSERT INTO lists(id, created_at, name, owner_id) VALUES ($1, $2, $3, $4) ON CONFLICT (id) DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, owner_id = EXCLUDED.owner_id';
+        'INSERT INTO people(id, created_at, name, owner_id) VALUES ($1, $2, $3, $4) ON CONFLICT (id) DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, owner_id = EXCLUDED.owner_id';
       values = [data.id, data.created_at, data.name, data.owner_id];
       break;
-    case 'todos':
+    case 'tasks':
       text =
-        'INSERT INTO todos(id, created_at, completed_at, description, completed, created_by, completed_by, list_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (id) DO UPDATE SET created_at = EXCLUDED.created_at, completed_at = EXCLUDED.completed_at, description = EXCLUDED.description, completed = EXCLUDED.completed, created_by = EXCLUDED.created_by, completed_by = EXCLUDED.completed_by, list_id = EXCLUDED.list_id';
+        'INSERT INTO tasks(id, created_at, name, completed, start_date, end_date, owner_id, person_id)' +
+        ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (id)' +
+        ' DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, completed = EXCLUDED.completed, start_date = EXCLUDED.start_date, end_date = EXCLUDED.end_date, owner_id = EXCLUDED.owner_id, person_id = EXCLUDED.person_id';
       values = [
         data.id,
         data.created_at,
-        data.completed_at,
-        data.description,
+        data.name,
         data.completed,
-        data.created_by,
-        data.completed_by,
-        data.list_id
+        data.start_date,
+        data.end_date,
+        data.owner_id,
+        data.person_id,
       ];
       break;
     default:

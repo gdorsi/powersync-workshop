@@ -1,35 +1,35 @@
-import { column, Schema, TableV2 } from '@powersync/web';
+import { column, Schema, TableV2 } from "@powersync/web";
 
-export const LISTS_TABLE = 'lists';
-export const TODOS_TABLE = 'todos';
+export const LISTS_TABLE = "people";
+export const TODOS_TABLE = "tasks";
 
-const todos = new TableV2(
+const tasks = new TableV2(
   {
-    list_id: column.text,
+    owner_id: column.text,
     created_at: column.text,
-    completed_at: column.text,
-    description: column.text,
-    created_by: column.text,
-    completed_by: column.text,
-    completed: column.integer
+    name: column.text,
+    completed: column.integer,
+    start_date: column.text,
+    end_date: column.text,
+    person_id: column.text,
   },
-  { indexes: { list: ['list_id'] } }
+  { indexes: { list: ["person_id", "owner_id", "start_date", "end_date"] } }
 );
 
-const lists = new TableV2({
+const people = new TableV2({
   created_at: column.text,
   name: column.text,
-  owner_id: column.text
+  owner_id: column.text,
 });
 
 export const AppSchema = new Schema({
-  todos,
-  lists
+  people,
+  tasks,
 });
 
-export type Database = (typeof AppSchema)['types'];
-export type TodoRecord = Database['todos'];
+export type Database = (typeof AppSchema)["types"];
+export type TodoRecord = Database["tasks"];
 // OR:
 // export type Todo = RowType<typeof todos>;
 
-export type ListRecord = Database['lists'];
+export type ListRecord = Database["people"];
