@@ -1,5 +1,5 @@
-import { AppSchema } from "@/library/powersync/AppSchema";
-import { DemoConnector } from "@/library/powersync/DemoConnector";
+import { AppSchema } from "@/lib/powersync/AppSchema";
+import { DemoConnector } from "@/lib/powersync/DemoConnector";
 import { PowerSyncContext } from "@powersync/react";
 import { WASQLitePowerSyncDatabaseOpenFactory } from "@powersync/web";
 import React, { Suspense } from "react";
