@@ -1,12 +1,36 @@
-# JavaScript Self Hosted Demo
+# Powesync - Schedule workshop!
 
-This demo contains a NodeJS backend and React frontend which are linked to a self hosted PowerSync instance.
+Welcome to the Powersync workshop!
+
+Our goal here is to explore toghether how a schedule would look like when build with a local-first tool.
+
+We have chosen Powersync among others because currently it would be the easier to adopt in an exisiting schedule app.
+
+To get an overview of what Powersync I suggest to take a look at the [overview page](https://docs.powersync.com/overview/readme-1).
+
+This graph is also a good way to get a gist
+
+![powersync arch](./powersync-overview.svg)
+
+## The workshop
+
+Well, this is a walkthrough more than a workshop.
+
+I've numbered the directories to give you a path to follow on watching files.
+
+First jump to the [init scripts](../1_init-scripts/setup.sql) to see how the DB is structured.
+
+Then jump directly into the [schedule app](../2_schedule-app/src/1_AppSchema.ts).
+
+Then follow the internal numeration.
+
+Following we are going to take a quick peek on the [data API](../3_schedule-backend/1_data.js) and on the [sync rules](../4_powersync-config/sync_rules.yaml)
 
 ## Running
 
 The `.env` file contains default configuration for the services. Reference this to connect to any services locally.
 
-This demo can be started by running the following in this demo directory
+The app can be started by running the following commands:
 
 ```bash
 docker compose up -d
