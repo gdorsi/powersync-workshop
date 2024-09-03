@@ -11,7 +11,7 @@ This demo can be started by running the following in this demo directory
 ```bash
 docker compose up -d
 
-cd demo-app
+cd schedule-app
 pnpm dev
 ```
 
