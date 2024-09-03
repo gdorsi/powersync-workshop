@@ -7,3 +7,11 @@ bucket_definitions:
     data:
       - SELECT * FROM people
       - SELECT * FROM tasks
+  # by_user:
+  #   # Select parameters for the bucket, using the current user_id
+  #   parameters: SELECT request.user_id() as user_id
+  #   # Note: `request.user_id()` replaced the previous `token_parameters.user_id` syntax
+  #   data:
+  #     # Select data rows using the parameters above
+  #     - SELECT * FROM people WHERE owner_id = bucket.user_id
+  #     - SELECT * FROM tasks WHERE owner_id = bucket.user_id

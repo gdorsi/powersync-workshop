@@ -33,7 +33,7 @@ export function Schedule() {
 const TaskCell = memo((props: { date: string; person: PersonRecord }) => {
   // Since the cells are virtualized, only the visible tasks are extracted from the local db
   const { data: tasks } = useQuery<TaskRecord>(
-    `SELECT ${Tables.Tasks}.* FROM ${Tables.Tasks} WHERE ${Tables.Tasks}.start_date = ? AND ${Tables.Tasks}.person_id = ?`,
+    `SELECT ${Tables.Tasks}.* FROM ${Tables.Tasks} WHERE ${Tables.Tasks}.date = ? AND ${Tables.Tasks}.person_id = ?`,
     [props.date, props.person.id]
   );
 

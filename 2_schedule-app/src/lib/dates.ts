@@ -21,3 +21,7 @@ export function dateToString(date: Date) {
 export function stringToDate(date: string) {
   return dates.parse(date, "yyyy-MM-dd", new Date());
 }
+
+export function cellIndexToReadableDate(i: number) {
+  return dates.format(dates.addDays(epoch, i), "d MMM");
+}

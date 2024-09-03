@@ -13,12 +13,11 @@ const tasks = new TableV2(
     created_at: column.text,
     name: column.text,
     completed: column.integer,
-    start_date: column.text,
-    end_date: column.text,
+    date: column.text,
     person_id: column.text,
   },
   // Since we have a real DB we can use indexes to optimize our queries
-  { indexes: { list: ["person_id", "start_date", "end_date"] } }
+  { indexes: { list: ["person_id", "date"] } }
 );
 
 const people = new TableV2({

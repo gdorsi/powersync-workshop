@@ -1,14 +1,11 @@
-import { PersonRecord, Tables, TaskRecord } from "@/1_AppSchema";
+import { PersonRecord } from "@/1_AppSchema";
 
 import { useVirtualizer, Virtualizer } from "@tanstack/react-virtual";
-import { memo, ReactNode, useEffect, useMemo, useRef } from "react";
-import { AddTask } from "../6_AddTask";
-import { cellIndexToDate, dateToString, getColumnCount } from "@/lib/dates";
-import { useQuery } from "@powersync/react";
-import { usePeople } from "@/3_usePeople";
+import { ReactNode, useEffect, useRef } from "react";
+import { cellIndexToReadableDate, getColumnCount } from "@/lib/dates";
 
-const ROW_HEIGHT = 50;
-const CELL_WIDTH = 100;
+const ROW_HEIGHT = 100;
+const CELL_WIDTH = 200;
 
 function useVirtualizers(peopleCount: number) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -18,6 +15,7 @@ function useVirtualizers(peopleCount: number) {
     getScrollElement: () => scrollRef.current,
     estimateSize: () => ROW_HEIGHT,
     overscan: 0,
+    paddingStart: 50,
   });
 
   const columnCount = getColumnCount();
@@ -65,6 +63,20 @@ export function ScheduleVirtualizer(props: {
           width: `${columnVirtualizer.getTotalSize()}px`,
         }}
       >
+        <div className="sticky top-0 h-[50px] w-full z-10">
+          {columnVirtualizer.getVirtualItems().map((virtualCell) => (
+            <div
+              key={virtualCell.index}
+              className="h-full flex items-center justify-center text-center absolute top-0 left-0 bg-white border-solid border-b-2 border-black"
+              style={{
+                width: `${virtualCell.size}px`,
+                transform: `translateX(${virtualCell.start}px)`,
+              }}
+            >
+              {cellIndexToReadableDate(virtualCell.index)}
+            </div>
+          ))}
+        </div>
         {rowVirtualizer.getVirtualItems().map((virtualRow) => (
           <div
             key={virtualRow.index}

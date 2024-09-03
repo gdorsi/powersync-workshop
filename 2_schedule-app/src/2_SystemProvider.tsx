@@ -3,6 +3,7 @@ import { BackendConnector } from "@/7_BackendConnector";
 import { PowerSyncContext } from "@powersync/react";
 import { WASQLitePowerSyncDatabaseOpenFactory } from "@powersync/web";
 import React, { Suspense } from "react";
+import { seed } from "./lib/seed";
 
 // This manages the persistence on the client
 // we use a SQLite DB modified to allow us to subscribe to queries
@@ -22,6 +23,9 @@ export const SystemProvider = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
     powerSync.init();
     powerSync.connect(connector);
+
+    // @ts-expect-error Storing as global to have fun with seeding later
+    window.runSeed = () => seed(powerSync, connector.userId);
   }, [powerSync, connector]);
 
   return (

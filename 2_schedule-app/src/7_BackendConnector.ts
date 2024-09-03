@@ -29,7 +29,9 @@ export class BackendConnector implements PowerSyncBackendConnector {
   // This may also contain parameters we want to use to query the Powersync buckets
   async fetchCredentials() {
     const tokenEndpoint = "api/auth/token";
-    const res = await fetch(`${this.config.backendUrl}/${tokenEndpoint}`);
+    const res = await fetch(
+      `${this.config.backendUrl}/${tokenEndpoint}?user_id=${this.userId}`
+    );
 
     if (!res.ok) {
       throw new Error(

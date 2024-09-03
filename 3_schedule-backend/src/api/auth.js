@@ -53,6 +53,8 @@ async function ensureKeys() {
  * Get the JWT token that PowerSync will use to authenticate the user
  */
 router.get('/token', async (req, res) => {
+  const userId = req.query.user_id;
+
   await ensureKeys();
   const powerSyncKey = keys.privateKey;
 
@@ -61,7 +63,7 @@ router.get('/token', async (req, res) => {
       alg: powerSyncKey.alg,
       kid: powerSyncKey.kid
     })
-    .setSubject('UserID')
+    .setSubject(userId)
     .setIssuedAt()
     .setIssuer(config.powersync.jwtIssuer)
     .setAudience(config.powersync.url)
@@ -69,7 +71,8 @@ router.get('/token', async (req, res) => {
     .sign(powerSyncKey.key);
   res.send({
     token: token,
-    powersync_url: config.powersync.url
+    powersync_url: config.powersync.url,
+    userId,
   });
 });
 

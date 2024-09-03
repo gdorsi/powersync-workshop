@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@faker-js/faker": "^8.4.1",
     "@journeyapps/wa-sqlite": "~0.2.0",
     "@powersync/react": "^1.3.5",
     "@powersync/web": "^0.8.1",
