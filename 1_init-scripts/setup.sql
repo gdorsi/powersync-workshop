@@ -22,8 +22,10 @@ create table public.tasks (
   );
 
 -- Creates some initial data to be synced
-INSERT INTO people (id, name, owner_id) VALUES ('75f89104-d95a-4f16-8309-5363f1bb377a', 'Guido', '85f89104-d95a-4f16-8309-5363f1bb377b');
-INSERT INTO tasks (name, person_id, owner_id, date) VALUES ('Create the workshop', '75f89104-d95a-4f16-8309-5363f1bb377a', '85f89104-d95a-4f16-8309-5363f1bb377b', '2024-08-30');
+INSERT INTO people (id, name, owner_id) VALUES ('75f89104-d95a-4f16-8309-5363f1bb377a', 'S. Mario', '85f89104-d95a-4f16-8309-5363f1bb377b');
+INSERT INTO people (id, name, owner_id) VALUES ('75f89104-d95a-4f16-8309-5363f1bb377b', 'Luigi', '85f89104-d95a-4f16-8309-5363f1bb377b');
+INSERT INTO people (id, name, owner_id) VALUES ('75f89104-d95a-4f16-8309-5363f1bb377c', 'Peach', '85f89104-d95a-4f16-8309-5363f1bb377b');
+INSERT INTO tasks (name, person_id, owner_id, date) VALUES ('Save the princess', '75f89104-d95a-4f16-8309-5363f1bb377a', '85f89104-d95a-4f16-8309-5363f1bb377b', '2024-09-20');
 
 -- Create publication for PowerSync
 create publication powersync for table people, tasks;

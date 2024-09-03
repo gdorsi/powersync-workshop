@@ -3,6 +3,9 @@
 # Note that changes to this file are not watched.
 # The service needs to be restarted for changes to take effect.
 bucket_definitions:
+  # The global bucket returns everything
+  # Try to comment it and uncomment the by_user bucket
+  # On the app the other users data should disappear (the inital seeded data is linked to a random user)
   global:
     data:
       - SELECT * FROM people
