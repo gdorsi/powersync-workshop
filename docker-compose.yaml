@@ -26,7 +26,7 @@ services:
       file: ./services/postgres.yaml
       service: pg-db
     volumes:
-      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./1_init-scripts:/docker-entrypoint-initdb.d
 
 volumes:
   # Postgres data

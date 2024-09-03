@@ -1,8 +1,8 @@
 services:
   # A backend which provides basic authentication and CRUD access to the Postgress DB from the client
-  demo-backend:
+  schedule-backend:
     build:
-      context: ./demo-backend
+      context: ./3_schedule-backend
       dockerfile: Dockerfile
     environment:
       # From the Postgress service name in linked Docker Compose file
