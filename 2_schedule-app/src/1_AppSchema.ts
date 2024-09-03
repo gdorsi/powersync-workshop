@@ -5,6 +5,8 @@ export enum Tables {
   Tasks = "tasks",
 }
 
+// This is how you declare a table with Powersync
+// Mind that since we are using SQLite the datatypes are quite limited here
 const tasks = new TableV2(
   {
     owner_id: column.text,
@@ -15,7 +17,8 @@ const tasks = new TableV2(
     end_date: column.text,
     person_id: column.text,
   },
-  { indexes: { list: ["person_id", "owner_id", "start_date", "end_date"] } }
+  // Since we have a real DB we can use indexes to optimize our queries
+  { indexes: { list: ["person_id", "start_date", "end_date"] } }
 );
 
 const people = new TableV2({
@@ -29,9 +32,8 @@ export const AppSchema = new Schema({
   tasks,
 });
 
+// Types can be inferred from the schema declaration
 export type Database = (typeof AppSchema)["types"];
-export type TaskRecord = Database["tasks"];
-// OR:
-// export type Todo = RowType<typeof todos>;
 
+export type TaskRecord = Database["tasks"];
 export type PersonRecord = Database["people"];

@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
-import { SystemProvider } from "../components/providers/SystemProvider";
-import { MainPage } from "./page";
+import { SystemProvider } from "@/2_SystemProvider";
+import { Schedule } from "@/4_Schedule";
+
 import "./styles.css";
 
 const root = createRoot(document.getElementById("app")!);
@@ -9,7 +10,7 @@ root.render(<App />);
 export function App() {
   return (
     <SystemProvider>
-      <MainPage />
+      <Schedule />
     </SystemProvider>
   );
 }

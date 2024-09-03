@@ -28,3 +28,5 @@ INSERT INTO tasks (name, person_id, owner_id, start_date, end_date) VALUES ('Cre
 
 -- Create publication for PowerSync
 create publication powersync for table people, tasks;
+
+-- Walkthrough continue on 2_schedule-app/src/1_AppSchema.ts

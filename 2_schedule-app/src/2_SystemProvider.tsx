@@ -1,19 +1,22 @@
-import { AppSchema } from "@/lib/powersync/AppSchema";
-import { DemoConnector } from "@/lib/powersync/DemoConnector";
+import { AppSchema } from "@/1_AppSchema";
+import { BackendConnector } from "@/7_BackendConnector";
 import { PowerSyncContext } from "@powersync/react";
 import { WASQLitePowerSyncDatabaseOpenFactory } from "@powersync/web";
 import React, { Suspense } from "react";
 
+// This manages the persistence on the client
+// we use a SQLite DB modified to allow us to subscribe to queries
 export const db = new WASQLitePowerSyncDatabaseOpenFactory({
   dbFilename: "schedule.db",
   schema: AppSchema,
 }).getInstance();
 
-const ConnectorContext = React.createContext<DemoConnector | null>(null);
+// The connector manages auth and the upload of the changes done locally
+const ConnectorContext = React.createContext<BackendConnector | null>(null);
 export const useConnector = () => React.useContext(ConnectorContext);
 
 export const SystemProvider = ({ children }: { children: React.ReactNode }) => {
-  const [connector] = React.useState(new DemoConnector());
+  const [connector] = React.useState(new BackendConnector());
   const [powerSync] = React.useState(db);
 
   React.useEffect(() => {
