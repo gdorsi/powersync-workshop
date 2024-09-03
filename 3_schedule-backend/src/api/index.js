@@ -1,6 +1,6 @@
 import express from 'express';
 import { authRouter } from './auth.js';
-import { dataRouter } from './data.js';
+import { dataRouter } from '../../1_data.js';
 
 const router = express.Router();
 

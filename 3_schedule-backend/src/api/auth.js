@@ -1,6 +1,6 @@
 import express from 'express';
 import { SignJWT, importJWK } from 'jose';
-import config from '../../config.js';
+import config from '../config.js';
 import { generateKeyPair } from '../utils/generate-key.js';
 const router = express.Router();
 

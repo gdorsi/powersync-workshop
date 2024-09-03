@@ -63,7 +63,7 @@ export class BackendConnector implements PowerSyncBackendConnector {
 
       switch (operationType) {
         case UpdateType.DELETE: {
-          await fetchWrapper(this.config, "DELETE", {
+          await fetchWrapper(this.config, UpdateType.DELETE, {
             table,
             data: {
               id,
@@ -72,7 +72,7 @@ export class BackendConnector implements PowerSyncBackendConnector {
           break;
         }
         case UpdateType.PUT: {
-          await fetchWrapper(this.config, "PUT", {
+          await fetchWrapper(this.config, UpdateType.PUT, {
             table,
             data: {
               id,
@@ -91,7 +91,7 @@ export class BackendConnector implements PowerSyncBackendConnector {
             [operation.id]
           );
 
-          await fetchWrapper(this.config, "PATCH", {
+          await fetchWrapper(this.config, UpdateType.PATCH, {
             table,
             data: {
               id,
@@ -108,6 +108,9 @@ export class BackendConnector implements PowerSyncBackendConnector {
   }
 }
 
+/**
+ * Walkthorugh continue on 3_schedule-backend/1_data.js
+ */
 const USER_ID_STORAGE_KEY = "ps_user_id";
 
 function mockGetUserId() {

@@ -34,7 +34,7 @@ export function AddTask(props: {
 
     // Very similar to add person
     await powerSync.execute(
-      `INSERT INTO ${Tables.Tasks} (id, created_at, person_id, owner_id, name, start_date, end_date) VALUES (uuid(), datetime(), ?, ?, ?, ?, ?) RETURNING *`,
+      `INSERT INTO ${Tables.Tasks} (id, created_at, completed, person_id, owner_id, name, start_date, end_date) VALUES (uuid(), datetime(), 1, ?, ?, ?, ?, ?) RETURNING *`,
       [props.person.id, userID, name, props.date, props.date]
     );
 
