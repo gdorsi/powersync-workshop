@@ -30,12 +30,13 @@ Following we are going to take a quick peek on the [data API](../3_schedule-back
 
 The `.env` file contains default configuration for the services. Reference this to connect to any services locally.
 
-The app can be started by running the following commands:
+Assuming that you have node already installed, the app can be started by running the following commands from the root directory:
 
 ```bash
 docker compose up -d
 
-cd 2_schedule-app
+corepack enable
+pnpm install
 pnpm dev
 ```
 

@@ -1,0 +1,17 @@
+{
+  "name": "powersync-workshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd 2_schedule-app && pnpm dev"
+  },
+  "pnpm": {
+    "overrides": {
+      "uuid": "^9.0.0"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

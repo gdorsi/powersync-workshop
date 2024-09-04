@@ -9,7 +9,9 @@ overrides:
 
 importers:
 
-  .:
+  .: {}
+
+  2_schedule-app:
     dependencies:
       '@esbuild-plugins/node-globals-polyfill':
         specifier: ^0.2.3
@@ -20,6 +22,9 @@ importers:
       '@journeyapps/wa-sqlite':
         specifier: ~0.2.0
         version: 0.2.0
+      '@powersync/kysely-driver':
+        specifier: ^0.3.0
+        version: 0.3.0(@powersync/common@1.9.0)
       '@powersync/react':
         specifier: ^1.3.5
         version: 1.3.5(@powersync/common@1.9.0)(react@18.2.0)
@@ -903,6 +908,11 @@ packages:
 
   '@powersync/common@1.9.0':
     resolution: {integrity: sha512-eVkvbZAtmp4SH4cjHPrIKtWZWw9hL70Kv/yQCg6H0ZVLX2SRm8wMt7sw8f1T0UrvCeyEQM564Kjd3eO4RBv6Yw==}
+
+  '@powersync/kysely-driver@0.3.0':
+    resolution: {integrity: sha512-/dpX6oVspnuXXsBDm56mjNJnDuB90dYHehrXmnGUaGYLt3NsDsLDp4UkgfZy5ahDPBmALm6r0w0H2fqWNZ0ByA==}
+    peerDependencies:
+      '@powersync/common': ^1.15.0
 
   '@powersync/react@1.3.5':
     resolution: {integrity: sha512-txJMpjClTw4Lcwyxrdnjg1zjwKVK/SiCHFuDJ3XFbRex9R9qI+KpJ8g285o6b7IN9oxpIVTG1aRBfd4w1yWZYw==}
@@ -2100,6 +2110,10 @@ packages:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
 
+  kysely@0.27.4:
+    resolution: {integrity: sha512-dyNKv2KRvYOQPLCAOCjjQuCk4YFd33BvGdf/o5bC7FiW+BB6snA81Zt+2wT9QDFzKqxKa5rrOmvlK/anehCcgA==}
+    engines: {node: '>=14.0.0'}
+
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -2265,9 +2279,6 @@ packages:
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
     engines: {node: '>=16 || 14 >=14.18'}
-
-  picocolors@1.0.0:
-    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
@@ -2950,7 +2961,7 @@ snapshots:
   '@babel/code-frame@7.24.2':
     dependencies:
       '@babel/highlight': 7.24.2
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   '@babel/compat-data@7.24.4': {}
 
@@ -3113,7 +3124,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   '@babel/parser@7.24.4':
     dependencies:
@@ -3802,6 +3813,11 @@ snapshots:
       rsocket-websocket-client: 1.0.0-alpha.3
     transitivePeerDependencies:
       - encoding
+
+  '@powersync/kysely-driver@0.3.0(@powersync/common@1.9.0)':
+    dependencies:
+      '@powersync/common': 1.9.0
+      kysely: 0.27.4
 
   '@powersync/react@1.3.5(@powersync/common@1.9.0)(react@18.2.0)':
     dependencies:
@@ -5010,6 +5026,8 @@ snapshots:
 
   jsonpointer@5.0.1: {}
 
+  kysely@0.27.4: {}
+
   leven@3.1.0: {}
 
   lilconfig@2.1.0: {}
@@ -5138,8 +5156,6 @@ snapshots:
     dependencies:
       lru-cache: 10.4.3
       minipass: 7.1.2
-
-  picocolors@1.0.0: {}
 
   picocolors@1.0.1: {}
 
@@ -5533,7 +5549,7 @@ snapshots:
       micromatch: 4.0.5
       normalize-path: 3.0.0
       object-hash: 3.0.0
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       postcss: 8.4.44
       postcss-import: 15.1.0(postcss@8.4.44)
       postcss-js: 4.0.1(postcss@8.4.44)
@@ -5666,7 +5682,7 @@ snapshots:
     dependencies:
       browserslist: 4.23.0
       escalade: 3.1.2
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   uri-js@4.4.1:
     dependencies:
