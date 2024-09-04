@@ -30,17 +30,12 @@ Following we are going to take a quick peek on the [data API](../3_schedule-back
 
 The `.env` file contains default configuration for the services. Reference this to connect to any services locally.
 
-Assuming that you have node already installed, the app can be started by running the following commands from the root directory:
-
-```bash
-docker compose up -d
-
-corepack enable
-pnpm install
-pnpm dev
-```
+You must have node and docker already installed.
+To start the app you can run `./workshop-up.sh` on the project root.
 
 The frontend can be accessed at `http://localhost:5173` in a browser.
+
+NOTE: there is a `./workshop-sudo-up.sh` command for linux users that require root privileges to run docker.
 
 ## Cleanup
 

@@ -4,8 +4,10 @@ bucket_definitions:
   # The global bucket returns everything
   # Try to comment it and uncomment the by_user bucket
   # On the app the other users data should disappear (the inital seeded data is linked to a random user)
+  #
   # Note that changes to this file are not watched.
   # The container needs to be restarted for changes to take effect.
+  # Run ./workshop-restart.sh on the project root to restart the containers
   global:
     data:
       - SELECT * FROM people
