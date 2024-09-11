@@ -104,16 +104,28 @@ const upsert = async (body, res) => {
       break;
     case 'tasks':
       text =
-        'INSERT INTO tasks(id, created_at, name, completed, start_date, end_date, owner_id, person_id)' +
-        ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (id)' +
-        ' DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, completed = EXCLUDED.completed, start_date = EXCLUDED.start_date, end_date = EXCLUDED.end_date, owner_id = EXCLUDED.owner_id, person_id = EXCLUDED.person_id';
+        'INSERT INTO tasks(id, created_at, name, date, owner_id, person_id)' +
+        ' VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (id)' +
+        ' DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, date = EXCLUDED.date, owner_id = EXCLUDED.owner_id, person_id = EXCLUDED.person_id';
       values = [
         data.id,
         data.created_at,
         data.name,
-        data.completed,
-        data.start_date,
-        data.end_date,
+        data.date,
+        data.owner_id,
+        data.person_id,
+      ];
+      break;
+    case 'timeoffs':
+      text =
+        'INSERT INTO timeoffs(id, created_at, name, date, owner_id, person_id)' +
+        ' VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (id)' +
+        ' DO UPDATE SET created_at = EXCLUDED.created_at, name = EXCLUDED.name, date = EXCLUDED.date, owner_id = EXCLUDED.owner_id, person_id = EXCLUDED.person_id';
+      values = [
+        data.id,
+        data.created_at,
+        data.name,
+        data.date,
         data.owner_id,
         data.person_id,
       ];

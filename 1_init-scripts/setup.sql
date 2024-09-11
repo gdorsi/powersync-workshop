@@ -14,11 +14,20 @@ create table public.tasks (
     id uuid not null default gen_random_uuid (),
     created_at timestamp with time zone not null default now(),
     name text not null,
-    completed boolean not null default false,
     date text not null,
     owner_id uuid not null,
     person_id uuid not null,
     constraint task_pkey primary key (id)
+  );
+
+create table public.timeoffs (
+    id uuid not null default gen_random_uuid (),
+    created_at timestamp with time zone not null default now(),
+    name text not null,
+    date text not null,
+    owner_id uuid not null,
+    person_id uuid not null,
+    constraint timeoff_pkey primary key (id)
   );
 
 -- Creates some initial data to be synced

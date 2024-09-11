@@ -1,13 +1,13 @@
 import { PersonRecord, Tables, TaskRecord } from "@/1_AppSchema";
 
 import { memo } from "react";
-import { AddTask } from "./6_AddTask";
+import { AllocationForm } from "./6_AllocationForm";
 import { useQuery } from "@powersync/react";
 import { usePeople } from "@/3_usePeople";
 import { ScheduleVirtualizer } from "./components/ScheduleVirtualizer";
 import { RowVirtualizer } from "./components/RowVirtualizer";
 import { PersonNameCell } from "./components/PersonNameCell";
-import { AddPerson } from "./5_AddPerson";
+import { AddPersonForm } from "./5_AddPersonForm";
 
 export function Schedule() {
   const people = usePeople();
@@ -20,17 +20,17 @@ export function Schedule() {
           <>
             <PersonNameCell person={person} />
             <RowVirtualizer virtualizer={cellVirtualizer}>
-              {(date) => <TaskCell person={person} date={date} />}
+              {(date) => <ScheduleCell person={person} date={date} />}
             </RowVirtualizer>
           </>
         )}
       </ScheduleVirtualizer>
-      <AddPerson /> {/* The dialog to add people */}
+      <AddPersonForm /> {/* The dialog to add people */}
     </>
   );
 }
 
-const TaskCell = memo((props: { date: string; person: PersonRecord }) => {
+const ScheduleCell = memo((props: { date: string; person: PersonRecord }) => {
   // Since the cells are virtualized, only the visible tasks are extracted from the local db
   const { data: tasks } = useQuery<TaskRecord>(
     `SELECT ${Tables.Tasks}.* FROM ${Tables.Tasks} WHERE ${Tables.Tasks}.date = ? AND ${Tables.Tasks}.person_id = ?`,
@@ -40,9 +40,9 @@ const TaskCell = memo((props: { date: string; person: PersonRecord }) => {
   // If there are no tasks in this cell, render the button to add one!
   if (!tasks.length) {
     return (
-      <AddTask person={props.person} date={props.date}>
+      <AllocationForm person={props.person} date={props.date}>
         <button className="h-full w-full"></button>
-      </AddTask>
+      </AllocationForm>
     );
   }
 

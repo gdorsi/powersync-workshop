@@ -69,11 +69,11 @@ export async function seed(
     }
 
     await powerSync.execute(
-      `INSERT INTO ${Tables.Tasks} (id, created_at, completed, person_id, owner_id, name, date) VALUES` +
+      `INSERT INTO ${Tables.Tasks} (id, created_at, person_id, owner_id, name, date) VALUES` +
         tasksToAdd
           .map(
             (task) =>
-              `(uuid(), datetime(), 1, '${
+              `(uuid(), datetime(), '${
                 task.person.id
               }', '${userID}', '${faker.word.sample()}', '${task.date}')`
           )

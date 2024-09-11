@@ -12,7 +12,6 @@ const tasks = new TableV2(
     owner_id: column.text,
     created_at: column.text,
     name: column.text,
-    completed: column.integer,
     date: column.text,
     person_id: column.text,
   },

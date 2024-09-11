@@ -1,6 +1,6 @@
 import React from "react";
 import { usePowerSync } from "@powersync/react";
-import { PersonRecord, Tables } from "@/1_AppSchema";
+import { Tables } from "@/1_AppSchema";
 import {
   Dialog,
   DialogContent,
@@ -14,14 +14,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUserId } from "./lib/useUserId";
 
-export function AddTask(props: {
-  person: PersonRecord;
-  date: string;
-  children: React.ReactNode;
-}) {
+export function AddPersonForm() {
   const powerSync = usePowerSync();
   const userID = useUserId();
-
   const [open, setOpen] = React.useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -32,10 +27,11 @@ export function AddTask(props: {
 
     if (typeof name !== "string") return;
 
-    // Very similar to add person
+    // Mutations are done through an insert query
+    // The connector then is responsible for the syncing of the local changes to the backend
     await powerSync.execute(
-      `INSERT INTO ${Tables.Tasks} (id, created_at, completed, person_id, owner_id, name, date) VALUES (uuid(), datetime(), 1, ?, ?, ?, ?) RETURNING *`,
-      [props.person.id, userID, name, props.date]
+      `INSERT INTO ${Tables.People} (id, created_at, name, owner_id) VALUES (uuid(), datetime(), ?, ?) RETURNING *`,
+      [name, userID]
     );
 
     setOpen(false);
@@ -43,12 +39,14 @@ export function AddTask(props: {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{props.children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <Button className="fixed bottom-3 right-3">Add person</Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add task to {props.person.name}</DialogTitle>
+          <DialogTitle>Add person</DialogTitle>
           <DialogDescription asChild>
-            <form id="add-task-form" onSubmit={handleSubmit}>
+            <form id="add-person-form" onSubmit={handleSubmit}>
               <label>
                 Name
                 <Input autoFocus name="name" type="text" required />
@@ -56,7 +54,7 @@ export function AddTask(props: {
             </form>
           </DialogDescription>
           <DialogFooter>
-            <Button form="add-task-form" type="submit">
+            <Button form="add-person-form" type="submit">
               Submit
             </Button>
           </DialogFooter>
