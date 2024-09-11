@@ -26,6 +26,8 @@ Then follow the internal numeration.
 
 Following we are going to take a quick peek on the [data API](./3_schedule-backend/1_data.js) and on the [sync rules](./4_powersync-config/sync_rules.yaml)
 
+To finish we have a [post-walkthrough exercise](./5_EXERCISE.md) that will let you have an hands-on experience with the concepts we've seen during the walkthrough.
+
 ## Running
 
 The `.env` file contains default configuration for the services. Reference this to connect to any services locally.
