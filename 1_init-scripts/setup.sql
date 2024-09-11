@@ -37,6 +37,6 @@ INSERT INTO people (id, name, owner_id) VALUES ('75f89104-d95a-4f16-8309-5363f1b
 INSERT INTO tasks (name, person_id, owner_id, date) VALUES ('Save the princess', '75f89104-d95a-4f16-8309-5363f1bb377a', '85f89104-d95a-4f16-8309-5363f1bb377b', '2024-09-20');
 
 -- Create publication for PowerSync
-create publication powersync for table people, tasks;
+create publication powersync for table people, tasks, timeoffs;
 
 -- Walkthrough continue on 2_schedule-app/src/1_AppSchema.ts
