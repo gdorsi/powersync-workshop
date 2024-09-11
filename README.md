@@ -18,13 +18,13 @@ Well, this is a walkthrough more than a workshop.
 
 I've numbered the directories to give you a path to follow on watching files.
 
-First jump to the [init scripts](../1_init-scripts/setup.sql) to see how the DB is structured.
+First jump to the [init scripts](./1_init-scripts/setup.sql) to see how the DB is structured.
 
-Then jump directly into the [schedule app](../2_schedule-app/src/1_AppSchema.ts).
+Then jump directly into the [schedule app](./2_schedule-app/src/1_AppSchema.ts).
 
 Then follow the internal numeration.
 
-Following we are going to take a quick peek on the [data API](../3_schedule-backend/1_data.js) and on the [sync rules](../4_powersync-config/sync_rules.yaml)
+Following we are going to take a quick peek on the [data API](./3_schedule-backend/1_data.js) and on the [sync rules](./4_powersync-config/sync_rules.yaml)
 
 ## Running
 
