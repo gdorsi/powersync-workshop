@@ -1,4 +1,4 @@
-import { PersonRecord, Tables, TaskRecord } from "@/1_AppSchema";
+import { PersonRecord, Tables, TaskRecord, TimeoffRecord } from "@/1_AppSchema";
 
 import { memo } from "react";
 import { AllocationForm } from "./6_AllocationForm";
@@ -37,8 +37,13 @@ const ScheduleCell = memo((props: { date: string; person: PersonRecord }) => {
     [props.date, props.person.id]
   );
 
+  const { data: timeoffs } = useQuery<TimeoffRecord>(
+    `SELECT ${Tables.Timeoffs}.* FROM ${Tables.Timeoffs} WHERE ${Tables.Timeoffs}.date = ? AND ${Tables.Timeoffs}.person_id = ?`,
+    [props.date, props.person.id]
+  );
+
   // If there are no tasks in this cell, render the button to add one!
-  if (!tasks.length) {
+  if (!tasks.length && !timeoffs.length) {
     return (
       <AllocationForm person={props.person} date={props.date}>
         <button className="h-full w-full"></button>
@@ -46,10 +51,13 @@ const ScheduleCell = memo((props: { date: string; person: PersonRecord }) => {
     );
   }
 
+  const timeoffsText = timeoffs.map((t) => t.name).join(", ");
+
   // Otherwise render the task name
   return (
     <div className="flex h-full w-full justify-center items-center bg-white overflow-hidden text-sm text-center">
       {tasks.map((t) => t.name).join(", ")}
+      {timeoffsText ? `Timeoff: ${timeoffsText}` : ""}
     </div>
   );
 });

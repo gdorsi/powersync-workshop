@@ -12,6 +12,7 @@ bucket_definitions:
     data:
       - SELECT * FROM people
       - SELECT * FROM tasks
+      - SELECT * FROM timeoffs
   # by_user:
   #   # Select parameters for the bucket, using the current user_id
   #   parameters: SELECT request.user_id() as user_id

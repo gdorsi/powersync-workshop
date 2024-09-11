@@ -29,14 +29,21 @@ export function AllocationForm(props: {
 
     const formData = new FormData(event.currentTarget);
     const name = formData.get("name");
+    const type = formData.get("type");
 
     if (typeof name !== "string") return;
 
-    // Very similar to add person
-    await powerSync.execute(
-      `INSERT INTO ${Tables.Tasks} (id, created_at, person_id, owner_id, name, date) VALUES (uuid(), datetime(), ?, ?, ?, ?) RETURNING *`,
-      [props.person.id, userID, name, props.date]
-    );
+    if (type === "task") {
+      await powerSync.execute(
+        `INSERT INTO ${Tables.Tasks} (id, created_at, person_id, owner_id, name, date) VALUES (uuid(), datetime(), ?, ?, ?, ?) RETURNING *`,
+        [props.person.id, userID, name, props.date]
+      );
+    } else {
+      await powerSync.execute(
+        `INSERT INTO ${Tables.Timeoffs} (id, created_at, person_id, owner_id, name, date) VALUES (uuid(), datetime(), ?, ?, ?, ?) RETURNING *`,
+        [props.person.id, userID, name, props.date]
+      );
+    }
 
     setOpen(false);
   }
@@ -53,6 +60,30 @@ export function AllocationForm(props: {
                 Name
                 <Input autoFocus name="name" type="text" required />
               </label>
+              <div className="flex items-center gap-4 py-4">
+                Type:
+                <label className="flex items-center gap-1">
+                  <input
+                    autoFocus
+                    name="type"
+                    type="radio"
+                    value={"task"}
+                    required
+                    defaultChecked
+                  />
+                  Task
+                </label>
+                <label className="flex items-center gap-1">
+                  <input
+                    autoFocus
+                    name="type"
+                    type="radio"
+                    value={"timeoff"}
+                    required
+                  />
+                  Timeoff
+                </label>
+              </div>
             </form>
           </DialogDescription>
           <DialogFooter>
