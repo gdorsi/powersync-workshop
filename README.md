@@ -12,7 +12,7 @@ This graph is also a good way to get a gist
 
 <img src="./assets/powersync-overview.svg" width="100%" alt="powersync architecture" />
 
-## The workshop
+## What's on the menu
 
 Well, this is a walkthrough more than a workshop.
 
